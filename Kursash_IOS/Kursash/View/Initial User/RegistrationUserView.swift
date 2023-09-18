@@ -32,7 +32,7 @@ struct RegistrationUserView: View {
             Button {
                 //
             } label: {
-                Text("Зарегестрироваться")
+                Text("Зарегистрироваться")
                     .font(.title2)
                     .foregroundColor(.black)
             }

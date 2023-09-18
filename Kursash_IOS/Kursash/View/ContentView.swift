@@ -10,10 +10,15 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         TabView {
-            Text("Библиотка")
+            Text("Погода")
                 .tabItem {
-                    Image(systemName: "book")
-                    Text("Библиотка")
+                    Image(systemName: "cloud")
+                    Text("Погода")
+                }
+            NewsView()
+                .tabItem {
+                    Image(systemName: "text.bubble")
+                    Text("Новости")
                 }
             Text("Аккаунт")
                 .tabItem {

@@ -13,6 +13,8 @@
 		3216FC472AB5A57A00C29CB3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3216FC462AB5A57A00C29CB3 /* Preview Assets.xcassets */; };
 		3216FC4E2AB5A6F200C29CB3 /* InitialUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3216FC4D2AB5A6F200C29CB3 /* InitialUserView.swift */; };
 		3216FC532AB5AB3400C29CB3 /* RegistrationUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3216FC522AB5AB3400C29CB3 /* RegistrationUserView.swift */; };
+		32A98A212AB862E80032223B /* NewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A98A202AB862E80032223B /* NewsView.swift */; };
+		32A98A232AB862FC0032223B /* NewsViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A98A222AB862FC0032223B /* NewsViewItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +25,8 @@
 		3216FC462AB5A57A00C29CB3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3216FC4D2AB5A6F200C29CB3 /* InitialUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialUserView.swift; sourceTree = "<group>"; };
 		3216FC522AB5AB3400C29CB3 /* RegistrationUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationUserView.swift; sourceTree = "<group>"; };
+		32A98A202AB862E80032223B /* NewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsView.swift; sourceTree = "<group>"; };
+		32A98A222AB862FC0032223B /* NewsViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				3216FC412AB5A57900C29CB3 /* ContentView.swift */,
+				32A98A1F2AB862DB0032223B /* News */,
 				3216FC4F2AB5AAEF00C29CB3 /* Initial User */,
 			);
 			path = View;
@@ -95,6 +100,15 @@
 			children = (
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		32A98A1F2AB862DB0032223B /* News */ = {
+			isa = PBXGroup;
+			children = (
+				32A98A202AB862E80032223B /* NewsView.swift */,
+				32A98A222AB862FC0032223B /* NewsViewItem.swift */,
+			);
+			path = News;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -169,7 +183,9 @@
 			files = (
 				3216FC422AB5A57900C29CB3 /* ContentView.swift in Sources */,
 				3216FC402AB5A57900C29CB3 /* KursashApp.swift in Sources */,
+				32A98A232AB862FC0032223B /* NewsViewItem.swift in Sources */,
 				3216FC532AB5AB3400C29CB3 /* RegistrationUserView.swift in Sources */,
+				32A98A212AB862E80032223B /* NewsView.swift in Sources */,
 				3216FC4E2AB5A6F200C29CB3 /* InitialUserView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
