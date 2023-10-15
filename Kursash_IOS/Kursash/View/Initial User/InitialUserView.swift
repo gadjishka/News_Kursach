@@ -11,6 +11,7 @@ struct InitialUserView: View {
     
     @State private var login: String = ""
     @State private var password: String = ""
+    @State private var isContentViewPresented = false
     
     var body: some View {
         NavigationStack {
@@ -32,7 +33,7 @@ struct InitialUserView: View {
                     .padding(.horizontal, 40)
                 
                 Button {
-                    //
+                    isContentViewPresented.toggle()
                 } label: {
                     Text("Войти")
                         .font(.title2)
@@ -41,6 +42,9 @@ struct InitialUserView: View {
                 .frame(width: 150, height: 70)
                 .background(Color(red: 0.4627, green: 0.8392, blue: 1.0))
                 .cornerRadius(10)
+                .fullScreenCover(isPresented: $isContentViewPresented) {
+                    ContentView()
+                }
                 Spacer()
                 HStack {
                     Text("Нет аккаунта?")
