@@ -4,8 +4,9 @@ package com.newsKursach.kursach.repositories;
 import com.newsKursach.kursach.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.Optional;
+
 public interface UserRepository extends JpaRepository<User, Long> {
-    User findByUsername(String username);
-    // Дополнительные методы для работы с пользователями
+    Optional<User> findByEmail(String email);
 }
 

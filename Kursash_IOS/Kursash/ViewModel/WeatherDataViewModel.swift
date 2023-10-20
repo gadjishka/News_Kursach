@@ -21,7 +21,7 @@ class WeatherDataViewModel: ObservableObject {
         isLoading = .start
         error = nil
         
-        guard let url = URL(string: "http://localhost:8080/weather/city/\(cityName)") else {
+        guard let url = URL(string: "http://localhost:8080/api/v1/weather/city/\(cityName)") else {
             error = "Неверный URL"
             isLoading = .notStart
             return
@@ -45,5 +45,12 @@ class WeatherDataViewModel: ObservableObject {
                 }
             }
         }.resume()
+    }
+    
+    func formatTimestamp(_ timestamp: Double) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm"
+        let date = Date(timeIntervalSince1970: timestamp)
+        return dateFormatter.string(from: date)
     }
 }

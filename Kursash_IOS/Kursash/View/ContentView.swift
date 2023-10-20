@@ -7,73 +7,40 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var cityName = ""
-    @StateObject private var weatherDataVM = WeatherDataViewModel()
-    
+    @State var authenticated = false
+    @State var isCheckingAuthentication = true // Добавляем состояние для отображения прогресса проверки аутентификации
+
     var body: some View {
-        GeometryReader { geometry in
-            VStack {
-                ZStack(alignment: .trailing) {
-                    RoundedRectangle(cornerRadius: 20)
-                        .fill(Color.gray.opacity(0.2))
-                        .frame(height: 40)
-                    
-                    HStack {
-                        TextField("Город", text: $cityName)
-                            .padding(.leading, 20)
-                            .frame(height: 40)
-                        
-                        Button(action: {
-                            weatherDataVM.fetchWeatherData(cityName: cityName)
-                            cityName = ""
-                        }) {
-                            Image(systemName: "magnifyingglass")
-                                .foregroundColor(.blue)
-                                .frame(width: 40, height: 40)
-                        }
-                    }
-                }
-                .padding()
-                .padding(.trailing, 10)
-                
-                if weatherDataVM.isLoading == .start {
-                    ProgressView("Загрузка...")
-                } else if let error = weatherDataVM.error {
-                    Text(error)
-                        .opacity(0.5)
-                } else if weatherDataVM.isLoading == .end {
-                    if let weatherData = weatherDataVM.weatherData {
-                        Text(weatherData.city)
-                            .font(.title)
-                            .padding()
-                        
-                        LazyVGrid(columns: [
-                            GridItem(),
-                            GridItem()
-                        ]) {
-                            WeatherDataFieldView(title: "Температура", value: "\(String(format: "%.1f", weatherData.temperature))°C", image: "thermometer.medium")
-                            WeatherDataFieldView(title: "Условия", value: weatherData.condition, image: "")
-                            WeatherDataFieldView(title: "Давление", value: "\(weatherData.pressure ?? 0) hPa", image: "drop.triangle")
-                            WeatherDataFieldView(title: "Влажность", value: "\(weatherData.humidity ?? 0)%", image: "humidity.fill")
-                            WeatherDataFieldView(title: "Восход", value: formatTimestamp(weatherData.sunrise ?? 0), image: "sunrise")
-                            WeatherDataFieldView(title: "Закат", value: formatTimestamp(weatherData.sunset ?? 0), image: "sunset")
-                            // Добавьте другие поля сюда
-                        }
-                        .padding(.horizontal)
-                    }
-                }
+        NavigationView {
+            if isCheckingAuthentication {
+                // Отображаем индикатор загрузки, пока идет проверка аутентификации
+                ProgressView("Checking Authentication...")
+            } else if authenticated {
+                WeatherView()
+            } else {
+                LoginView()
             }
-            .frame(width: geometry.size.width, height: geometry.size.height, alignment: .top)
-            
         }
-        
+        .onAppear {
+            // Проверяем аутентификацию пользователя при появлении экрана
+            checkAuthentication()
+        }
     }
-    
-    private func formatTimestamp(_ timestamp: Double) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "HH:mm"
-        let date = Date(timeIntervalSince1970: timestamp)
-        return dateFormatter.string(from: date)
+
+    func checkAuthentication() {
+        // Здесь вызываем функцию authenticateUser для проверки аутентификации
+        authenticateUser(email: "gadji@mail.ru", password: "123") { authResponse, error in
+            if let _ = authResponse {
+                // Аутентификация успешна, устанавливаем authenticated в true
+                authenticated = true
+            } else if let error = error {
+                // Произошла ошибка при аутентификации, можно обработать ее
+                print("Authentication Error: \(error.localizedDescription)")
+            }
+            
+            // Завершаем процесс проверки аутентификации
+            isCheckingAuthentication = false
+        }
     }
 }
 
@@ -83,8 +50,7 @@ struct ContentView: View {
 
 
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
+
+#Preview {
+    ContentView()
 }
