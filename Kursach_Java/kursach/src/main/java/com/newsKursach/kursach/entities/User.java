@@ -11,7 +11,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 
 @Data
 @Builder
@@ -43,10 +42,17 @@ public class User implements UserDetails {
     public String getPassword() {
         return password;
     }
-
     @Override
     public String getUsername() {
         return email;
+    }
+
+    public String getFirstName(){
+        return firstname;
+    }
+
+    public String getLastName(){
+        return lastname;
     }
 
     @Override

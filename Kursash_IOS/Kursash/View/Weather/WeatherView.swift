@@ -10,6 +10,7 @@ import SwiftUI
 struct WeatherView: View {
     @State private var cityName = ""
     @StateObject private var weatherDataVM = WeatherDataViewModel()
+    @EnvironmentObject var mainVM: MainViewModel
     
     var body: some View {
         GeometryReader { geometry in
@@ -25,7 +26,8 @@ struct WeatherView: View {
                             .frame(height: 40)
                         
                         Button(action: {
-                            weatherDataVM.fetchWeatherData(cityName: cityName)
+                            
+                            weatherDataVM.fetchWeatherData(cityName: cityName, token: mainVM.token!)
                             cityName = ""
                         }) {
                             Image(systemName: "magnifyingglass")
@@ -38,7 +40,7 @@ struct WeatherView: View {
                 .padding(.trailing, 10)
                 
                 if weatherDataVM.isLoading == .start {
-                    ProgressView("Загрузка...")
+                    ProgressView("Loading...")
                 } else if let error = weatherDataVM.error {
                     Text(error)
                         .opacity(0.5)
@@ -62,6 +64,14 @@ struct WeatherView: View {
                         }
                         .padding(.horizontal)
                     }
+                }
+            }
+            Spacer()
+            HStack {
+                Button{
+                    mainVM.logout()
+                } label: {
+                    Text("Logout")
                 }
             }
             .frame(width: geometry.size.width, height: geometry.size.height, alignment: .top)

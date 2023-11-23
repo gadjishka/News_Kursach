@@ -1,6 +1,6 @@
 package com.newsKursach.kursach.services;
 
-import com.newsKursach.kursach.apiResponse.OpenWeatherMapResponse;
+import com.newsKursach.kursach.apiResponse.WeatherAPI.OpenWeatherMapResponse;
 
 import com.newsKursach.kursach.entities.WeatherData;
 import org.springframework.beans.factory.annotation.Value;
@@ -10,10 +10,10 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class WeatherService {
     @Value("e156e27a3826eebeaff26f7eecba4a1d")
-    private String apiKey; // Подставьте ваш ключ API OpenWeatherMap
+    private String weatherApiKey; // Подставьте ваш ключ API OpenWeatherMap
 
     public WeatherData getWeatherData(String cityName) {
-        String apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + apiKey;
+        String apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + weatherApiKey;
 
         // Создаем экземпляр RestTemplate для выполнения HTTP-запросов
         RestTemplate restTemplate = new RestTemplate();

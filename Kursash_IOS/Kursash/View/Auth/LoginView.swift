@@ -8,12 +8,11 @@
 import SwiftUI
 
 struct LoginView: View {
-    @State
-    var login = ""
-    @State
-    var password = ""
+    @State var login = ""
+    @State var password = ""
     @State private var token = ""
     let color = #colorLiteral(red: 0.5811814666, green: 0.8301858306, blue: 0.9220091105, alpha: 1)
+    @EnvironmentObject var mainVM: MainViewModel
     
     var body: some View {
         GeometryReader { geometry in
@@ -21,7 +20,7 @@ struct LoginView: View {
                 Color(color)
             }
             .ignoresSafeArea()
-            ScrollView {
+            VStack {
                 
                 VStack(spacing: 0) {
                     Image("logo")
@@ -53,54 +52,33 @@ struct LoginView: View {
                         
                         SecureField("", text: $password)
 
-                        Button {
-                            authenticateUser(email: login, password: password) { (authResponse, error) in
-                                if let authResponse = authResponse {
-                                    token = authResponse.token
-                                    print("Успешная авторизация. Токен: \(authResponse.token)")
-                                    // Здесь можно сохранить токен для будущих запросов
-                                } else if let error = error {
-                                    print("Ошибка при авторизации: \(error)")
-                                }
+                        if mainVM.loginPending {
+                            ProgressView()
+                                .progressViewStyle(CircularProgressViewStyle(tint: .black))
+                                .scaleEffect(1.2)
+                                .padding(.top, 26)
+                        } else {
+                            Button {
+                                mainVM.login(email: login, password: password)
+                            } label: {
+                                Text("Authorize")
+                                    .foregroundColor(Color.white)
+                                    .fontWeight(.bold)
+                                    .padding(.vertical, 12)
+                                    .frame(maxWidth: .infinity)
+                                    .background(Color(color))
                             }
-                        } label: {
-                            Text("Authorize")
-                                .foregroundColor(Color.white)
-                                .fontWeight(.bold)
-                                .padding(.vertical, 12)
-                                .frame(maxWidth: .infinity)
-                                .background(Color(color))
+                            
+                            .cornerRadius(10)
+                            .padding(.top, 26)
+                            .padding(.horizontal, 24)
                         }
                         
-                        .cornerRadius(10)
-                        .padding(.top, 26)
-                        .padding(.horizontal, 24)
-                        
-                        Button {
-                            getDataWithToken(token: token) { (data, error) in
-                                if let data = data {
-                                    if let responseString = String(data: data, encoding: .utf8) {
-                                        print("Данные с сервера: \(responseString)")
-                                        // Здесь обрабатывайте данные с сервера
-                                    } else {
-                                        print("Не удалось преобразовать данные в строку.")
-                                    }
-                                } else if let error = error {
-                                    print("Ошибка при получении данных: \(error)")
-                                }
-                            }
-                        } label: {
-                            Text("Get info")
-                                .foregroundColor(Color.white)
+                        NavigationLink(destination: SignView()) {
+                            Text("Register")
                                 .fontWeight(.bold)
-                                .padding(.vertical, 12)
-                                .frame(maxWidth: .infinity)
-                                .background(Color(color))
                         }
-                        
-                        .cornerRadius(10)
-                        .padding(.top, 26)
-                        .padding(.horizontal, 24)
+                        .padding(.top, 12)
                         
                         
                     }

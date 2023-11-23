@@ -2,9 +2,6 @@ package com.newsKursach.kursach.entities;
 
 import lombok.Getter;
 
-
-import lombok.Getter;
-
 @Getter
 public class WeatherData {
     private String city;

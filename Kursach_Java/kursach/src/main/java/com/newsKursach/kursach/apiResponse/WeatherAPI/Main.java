@@ -1,4 +1,4 @@
-package com.newsKursach.kursach.apiResponse;
+package com.newsKursach.kursach.apiResponse.WeatherAPI;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;

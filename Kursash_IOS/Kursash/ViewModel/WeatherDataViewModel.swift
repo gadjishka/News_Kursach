@@ -13,11 +13,12 @@ enum Loading {
 }
 
 class WeatherDataViewModel: ObservableObject {
+    static let shared = WeatherDataViewModel()
     @Published var weatherData: WeatherData?
     @Published var isLoading: Loading = .notStart
     @Published var error: String?
-
-    func fetchWeatherData(cityName: String) {
+    
+    func fetchWeatherData(cityName: String, token: String) {
         isLoading = .start
         error = nil
         
@@ -26,8 +27,11 @@ class WeatherDataViewModel: ObservableObject {
             isLoading = .notStart
             return
         }
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.setValue("Bearer " + token, forHTTPHeaderField: "Authorization")
         
-        URLSession.shared.dataTask(with: url) { data, _, error in
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             DispatchQueue.main.async {
                 self.isLoading = .end
                 if let error = error {
@@ -44,8 +48,12 @@ class WeatherDataViewModel: ObservableObject {
                     }
                 }
             }
-        }.resume()
+        }
+        
+        task.resume()
+        
     }
+    
     
     func formatTimestamp(_ timestamp: Double) -> String {
         let dateFormatter = DateFormatter()

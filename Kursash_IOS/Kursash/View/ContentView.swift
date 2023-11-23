@@ -7,41 +7,48 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var authenticated = false
-    @State var isCheckingAuthentication = true // Добавляем состояние для отображения прогресса проверки аутентификации
-
+    @StateObject var mainVM = MainViewModel()
+    
     var body: some View {
         NavigationView {
-            if isCheckingAuthentication {
-                // Отображаем индикатор загрузки, пока идет проверка аутентификации
-                ProgressView("Checking Authentication...")
-            } else if authenticated {
-                WeatherView()
-            } else {
-                LoginView()
-            }
-        }
-        .onAppear {
-            // Проверяем аутентификацию пользователя при появлении экрана
-            checkAuthentication()
-        }
-    }
-
-    func checkAuthentication() {
-        // Здесь вызываем функцию authenticateUser для проверки аутентификации
-        authenticateUser(email: "gadji@mail.ru", password: "123") { authResponse, error in
-            if let _ = authResponse {
-                // Аутентификация успешна, устанавливаем authenticated в true
-                authenticated = true
-            } else if let error = error {
-                // Произошла ошибка при аутентификации, можно обработать ее
-                print("Authentication Error: \(error.localizedDescription)")
+            Group {
+                if mainVM.showAuthContainer == .loading {
+                    LoadingView()
+                        .onAppear {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                mainVM.checkToken()
+                            
+                            }
+                        }
+                } else if mainVM.showAuthContainer == .show {
+                    LoginView()
+                } else if mainVM.showAuthContainer == .not_show {
+                    TabView {
+                        WeatherView()
+                            .tabItem {
+                                Image(systemName: "cloud")
+                                Text("Weather")
+                            }
+                        NasaView()
+                            .tabItem {
+                                Image(systemName: "cloud")
+                                Text("Nasa")
+                            }
+                        
+                    }
+                    
+                }
             }
             
-            // Завершаем процесс проверки аутентификации
-            isCheckingAuthentication = false
         }
+        
+        .navigationViewStyle(StackNavigationViewStyle())
+        .environmentObject(mainVM)
+        .navigationBarTitle("", displayMode: .inline)
+        .preferredColorScheme(.light)
+        
     }
+    
 }
 
 
