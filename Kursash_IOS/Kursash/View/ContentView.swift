@@ -4,28 +4,60 @@
 //
 //  Created by Гаджи Герейакаев on 16.09.2023.
 //
-
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject var mainVM = MainViewModel()
+    
     var body: some View {
-        TabView {
-            Text("Библиотка")
-                .tabItem {
-                    Image(systemName: "book")
-                    Text("Библиотка")
+        NavigationView {
+            Group {
+                if mainVM.showAuthContainer == .loading {
+                    LoadingView()
+                        .onAppear {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                mainVM.checkToken()
+                            
+                            }
+                        }
+                } else if mainVM.showAuthContainer == .show {
+                    LoginView()
+                } else if mainVM.showAuthContainer == .not_show {
+                    TabView {
+                        WeatherView()
+                            .tabItem {
+                                Image(systemName: "cloud")
+                                Text("Weather")
+                            }
+                        NasaView()
+                            .tabItem {
+                                Image(systemName: "cloud")
+                                Text("Nasa")
+                            }
+                        
+                    }
+                    
                 }
-            Text("Аккаунт")
-                .tabItem {
-                    Image(systemName: "person")
-                    Text("Аккаунт")
-                }
+            }
+            
         }
+        
+        .navigationViewStyle(StackNavigationViewStyle())
+        .environmentObject(mainVM)
+        .navigationBarTitle("", displayMode: .inline)
+        .preferredColorScheme(.light)
+        
     }
+    
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
+
+
+
+
+
+
+
+#Preview {
+    ContentView()
 }

@@ -11,7 +11,7 @@ import SwiftUI
 struct KursashApp: App {
     var body: some Scene {
         WindowGroup {
-            InitialUserView()
+            ContentView()
         }
     }
 }

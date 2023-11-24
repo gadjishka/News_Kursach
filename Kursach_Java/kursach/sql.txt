@@ -1,0 +1,37 @@
+create schema weatherapp;
+
+set search_path to weatherapp;
+
+CREATE TABLE Users (
+    user_id SERIAL PRIMARY KEY,
+    username VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    role_id INT REFERENCES Roles(role_id)
+);
+CREATE TABLE Roles (
+    role_id SERIAL PRIMARY KEY,
+    role_name VARCHAR(50) NOT NULL
+);
+CREATE TABLE Cities (
+    city_id SERIAL PRIMARY KEY,
+    city_name VARCHAR(255) NOT NULL,
+    country VARCHAR(255) NOT NULL
+);
+CREATE TABLE Subscriptions (
+    subscription_id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES Users(user_id),
+    city_id INT REFERENCES Cities(city_id)
+);
+
+-- Вставка данных о ролях
+INSERT INTO Roles (role_name) VALUES ('ROLE_USER');
+
+-- Вставка данных о пользователях с ролью "Пользователь" и случайными городами
+INSERT INTO Users (username, password, role_id) VALUES ('user1', 'password1', (SELECT role_id FROM Roles WHERE role_name = 'ROLE_USER'));
+INSERT INTO Users (username, password, role_id) VALUES ('user2', 'password2', (SELECT role_id FROM Roles WHERE role_name = 'ROLE_USER'));
+
+-- Вставка случайных данных о городах
+INSERT INTO Cities (city_name, country) VALUES ('Город1', 'Страна1');
+INSERT INTO Cities (city_name, country) VALUES ('Город2', 'Страна2');
+
+

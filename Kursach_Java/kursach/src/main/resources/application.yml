@@ -1,0 +1,27 @@
+server:
+  port: 8080
+
+openweathermap:
+  api:
+    key: e156e27a3826eebeaff26f7eecba4a1d
+
+nasa:
+  api:
+    key: QtXaKbPv2H4dPIHuhQzK4CaR4tJMNa4xrbdk2igY
+jwt_secret: ${my_secret}
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5434/jwt_security
+    username: postgres
+    password: admin
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
