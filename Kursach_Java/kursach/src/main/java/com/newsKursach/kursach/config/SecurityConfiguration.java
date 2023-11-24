@@ -30,6 +30,8 @@ public class SecurityConfiguration {
                 .csrf(AbstractHttpConfigurer::disable)
 
                 .authorizeRequests((authorize) -> authorize
+
+                        .requestMatchers("/send-email").permitAll() // Разрешаем доступ без аутентификации к /send-email
                         .requestMatchers("/api/v1/auth/**")
                         .permitAll()
                         .anyRequest()
