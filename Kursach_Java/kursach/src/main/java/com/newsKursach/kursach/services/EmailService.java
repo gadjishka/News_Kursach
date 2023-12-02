@@ -14,6 +14,7 @@ public class EmailService {
     private JavaMailSender emailSender;
 
     public void sendSimpleMessage(String to, String subject, String text) {
+        // тут генерируется код для 2fa
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(to);
         message.setSubject(subject);

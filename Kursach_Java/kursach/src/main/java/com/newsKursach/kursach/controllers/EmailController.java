@@ -11,18 +11,16 @@ import org.springframework.web.bind.annotation.RestController;
 public class EmailController {
 
     @Autowired
-    private EmailService emailService; // Предположим, что у вас уже есть сервис для отправки электронных писем
+    private EmailService emailService;
 
     @PostMapping("/send-email")
     public String sendEmail(@RequestBody EmailRequest emailRequest) {
-        // Здесь можно добавить логику для отправки электронного письма
-        // EmailRequest - это класс, представляющий данные, передаваемые в теле запроса
+
 
         String to = emailRequest.getEmail();
         String subject = emailRequest.getSubject();
         String message = emailRequest.getMessage();
 
-        // Пример вызова сервиса отправки писем
         emailService.sendSimpleMessage(to, subject, message);
 
         return "Email sent successfully";

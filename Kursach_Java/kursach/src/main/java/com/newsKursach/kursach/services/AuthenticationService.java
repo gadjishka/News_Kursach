@@ -25,7 +25,7 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
     private final RoleRepository roleRepository;
     public AuthenticationResponse register(RegisterRequest request) {
-//TODO: ПРоверка польщователя на существование
+    //TODO: ПРоверка польщователя на существование
         var user = User.builder()
                 .firstname(request.getFirstname())
                 .lastname(request.getLastname())
