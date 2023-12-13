@@ -10,9 +10,11 @@ import SwiftUI
 struct UserProfileView: View {
     
     
-    private var userName: String = "Gadji Ballin"
-    private var email: String = "gadjig@mil.ru"
-    
+    @State private var userName: String = "Gadji"
+    @State private var userLastName: String = "Ballin"
+    @State private var email: String = "gadjig@mil.ru"
+    @State private var favoriteCity = "Moscow"
+    @State private var isEditingCity = false
     
     var body: some View {
         NavigationStack {
@@ -24,13 +26,40 @@ struct UserProfileView: View {
                 }
                 
                 Section {
-                    Text("Moscow")
+                    Text(favoriteCity)
+                        .onTapGesture {
+                            isEditingCity = true
+                        }
                 } header: {
                     Text("Favorite city")
                 }
                 
+                Section {
+                    Button {
+                        //
+                    } label: {
+                        Text("Log out")
+                            .foregroundColor(.red)
+                            
+                    }
+                } .frame(maxWidth: .infinity, alignment: .center)
             }
-            .navigationTitle(userName)
+            .sheet(isPresented: $isEditingCity) {
+                Text("Enter your favorite city")
+                TextField("Favorite city", text: $favoriteCity, onCommit: {
+                    isEditingCity = false
+                })
+                .padding()
+            }
+            
+            .navigationTitle(userName + " " + userLastName)
+        }
+        .onAppear{
+            let userData: UserData = TokenManager.getUserDataFromToken()
+            
+            userName = userData.firstname
+            userLastName = userData.lastname
+            email = userData.email
         }
     }
 }

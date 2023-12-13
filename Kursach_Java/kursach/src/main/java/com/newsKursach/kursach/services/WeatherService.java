@@ -10,15 +10,13 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class WeatherService {
     @Value("e156e27a3826eebeaff26f7eecba4a1d")
-    private String weatherApiKey; // Подставьте ваш ключ API OpenWeatherMap
+    private String weatherApiKey;
 
     public WeatherData getWeatherData(String cityName) {
         String apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + weatherApiKey;
 
-        // Создаем экземпляр RestTemplate для выполнения HTTP-запросов
         RestTemplate restTemplate = new RestTemplate();
 
-        // Выполняем GET-запрос к API OpenWeatherMap
         OpenWeatherMapResponse response = restTemplate.getForObject(apiUrl, OpenWeatherMapResponse.class);
 
         if (response != null) {

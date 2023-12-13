@@ -26,8 +26,6 @@ public class WeatherData {
     private long sunrise;
     private long sunset;
 
-    // Геттеры и сеттеры
-
     public void setCity(String city) {
         this.city = city;
     }

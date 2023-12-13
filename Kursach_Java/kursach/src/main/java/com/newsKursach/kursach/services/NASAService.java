@@ -20,7 +20,6 @@ public class NASAService {
             apiUrl += "&date=" + date;
         }
 
-        // Используем RestTemplate для отправки запроса к API
         RestTemplate restTemplate = new RestTemplate();
         return restTemplate.getForObject(apiUrl, NasaResponse.class);
     }

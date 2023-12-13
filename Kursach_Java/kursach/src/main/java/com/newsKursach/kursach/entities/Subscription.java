@@ -15,9 +15,6 @@ public class Subscription {
     @ManyToOne
     @JoinColumn(name = "city_id")
     private City city;
-    // Геттеры и сеттеры
-
-
     public void setId(Long id) {
         this.id = id;
     }

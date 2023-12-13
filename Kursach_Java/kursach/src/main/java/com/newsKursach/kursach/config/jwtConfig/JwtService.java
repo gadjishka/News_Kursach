@@ -17,7 +17,6 @@ import java.util.function.Function;
 
 @Service
 public class JwtService {
-    //TODO: аннотация value
     @Value("${jwt_secret}")
     private static final String SECRET_KEY = "t/Chp1gPpZgs0ZDJ+Jm0fAKfEel+eSlB8iEqrDAYI0cjyiMaG1WGX21jQxyIHwOA";
     public String extractUsername(String token) {

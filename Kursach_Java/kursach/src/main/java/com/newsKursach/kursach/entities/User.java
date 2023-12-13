@@ -21,16 +21,18 @@ import java.util.Collections;
 public class User implements UserDetails {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String firstname;
     private String lastname;
     private String email;
     private String password;
     @ManyToOne
+    @JoinColumn(name = "fav_city", referencedColumnName = "cityName")
+    private City favCity;
+    @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

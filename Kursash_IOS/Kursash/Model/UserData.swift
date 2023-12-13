@@ -19,4 +19,10 @@ struct UserData {
         self.email = email
     }
     
+    init() {
+        self.firstname = ""
+        self.lastname = ""
+        self.email = ""
+    }
+    
 }

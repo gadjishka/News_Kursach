@@ -1,9 +1,12 @@
 package com.newsKursach.kursach.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
+import lombok.*;
 
-@Getter
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "Cities")
 public class City {
@@ -11,9 +14,9 @@ public class City {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "city_id")
     private Long id;
+
+    @Column(name = "cityName", unique = true)
     private String cityName;
-    private String country;
-    // Геттеры и сеттеры
 
     public void setId(Long id) {
         this.id = id;
@@ -23,7 +26,4 @@ public class City {
         this.cityName = cityName;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
-    }
 }

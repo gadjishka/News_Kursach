@@ -129,8 +129,30 @@ class TokenManager {
         }
     }
     
+    static func getUserDataFromToken() -> UserData {
+        guard let _ = TokenManager.loadToken() else {
+            return UserData(firstname: "", lastname: "", email: "")
+        }
+        
+        var userData: UserData = UserData()
+        
+        do {
+            let token = try TokenManager.getDataFromToken()
+            
+            userData.firstname = token["firstname"] as! String
+            userData.lastname = token["lastname"] as! String
+            userData.email = token["sub"] as! String
+            
+            return userData
+        } catch {
+            print("sorry")
+            return UserData(firstname: "", lastname: "", email: "")
+        }
+    }
+    
     
 }
+
 
 enum TokenExpTime {
     case expired, lessThanDay, ok

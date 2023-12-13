@@ -34,6 +34,11 @@ struct ContentView: View {
                                 Image(systemName: "cloud")
                                 Text("Nasa")
                             }
+                        UserProfileView()
+                            .tabItem {
+                                Image(systemName: "person")
+                                Text("Account")
+                            }
                         
                     }
                     
