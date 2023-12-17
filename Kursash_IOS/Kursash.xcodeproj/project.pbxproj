@@ -21,11 +21,11 @@
 		3220AB582B06650700C9CA72 /* NasaData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3220AB572B06650700C9CA72 /* NasaData.swift */; };
 		3220AB5A2B06659000C9CA72 /* NasaDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3220AB592B06659000C9CA72 /* NasaDataViewModel.swift */; };
 		322156B92B08CC1E00974156 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322156B82B08CC1E00974156 /* UserProfileView.swift */; };
+		3221E65B2B2EEA0200711206 /* YouTubePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3221E65A2B2EEA0200711206 /* YouTubePlayer.swift */; };
+		3221E65D2B2EF8A300711206 /* TwoAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3221E65C2B2EF8A300711206 /* TwoAuthView.swift */; };
 		3269F9EC2B067D68004E5AFF /* NasaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3269F9EB2B067D68004E5AFF /* NasaView.swift */; };
-		32867AE92AE82256004CF233 /* test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32867AE82AE82256004CF233 /* test.swift */; };
 		32B06D4B2AE2EBDF00E8A04B /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B06D4A2AE2EBDF00E8A04B /* MainViewModel.swift */; };
 		32B06D4D2AE2F99600E8A04B /* TokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B06D4C2AE2F99600E8A04B /* TokenManager.swift */; };
-		32B06D4F2AE2FD2700E8A04B /* IdentifiableAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B06D4E2AE2FD2700E8A04B /* IdentifiableAlert.swift */; };
 		32B06D512AE3008200E8A04B /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B06D502AE3008200E8A04B /* APIConstants.swift */; };
 		32E055BC2B08327600AAC771 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E055BB2B08327600AAC771 /* UserData.swift */; };
 		32EC4B7E2AE08CCD001E3605 /* CustomTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32EC4B7D2AE08CCD001E3605 /* CustomTextFieldStyle.swift */; };
@@ -49,11 +49,11 @@
 		3220AB572B06650700C9CA72 /* NasaData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NasaData.swift; sourceTree = "<group>"; };
 		3220AB592B06659000C9CA72 /* NasaDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NasaDataViewModel.swift; sourceTree = "<group>"; };
 		322156B82B08CC1E00974156 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
+		3221E65A2B2EEA0200711206 /* YouTubePlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouTubePlayer.swift; sourceTree = "<group>"; };
+		3221E65C2B2EF8A300711206 /* TwoAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoAuthView.swift; sourceTree = "<group>"; };
 		3269F9EB2B067D68004E5AFF /* NasaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NasaView.swift; sourceTree = "<group>"; };
-		32867AE82AE82256004CF233 /* test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test.swift; sourceTree = "<group>"; };
 		32B06D4A2AE2EBDF00E8A04B /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		32B06D4C2AE2F99600E8A04B /* TokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenManager.swift; sourceTree = "<group>"; };
-		32B06D4E2AE2FD2700E8A04B /* IdentifiableAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifiableAlert.swift; sourceTree = "<group>"; };
 		32B06D502AE3008200E8A04B /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
 		32E055BB2B08327600AAC771 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		32EC4B7D2AE08CCD001E3605 /* CustomTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextFieldStyle.swift; sourceTree = "<group>"; };
@@ -78,6 +78,7 @@
 				3207E28A2ADE9A8C00C010B3 /* LoginView.swift */,
 				3207E28C2ADE9A9300C010B3 /* SignView.swift */,
 				32EC4B7D2AE08CCD001E3605 /* CustomTextFieldStyle.swift */,
+				3221E65C2B2EF8A300711206 /* TwoAuthView.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -125,13 +126,10 @@
 				320CAF422ADBCF1D00C509DF /* ViewModel */,
 				3216FC512AB5AB0900C29CB3 /* Model */,
 				3216FC502AB5AB0400C29CB3 /* View */,
+				3216FC412AB5A57900C29CB3 /* ContentView.swift */,
 				3216FC3F2AB5A57900C29CB3 /* KursashApp.swift */,
 				3216FC432AB5A57A00C29CB3 /* Assets.xcassets */,
 				3216FC452AB5A57A00C29CB3 /* Preview Content */,
-				32B06D4E2AE2FD2700E8A04B /* IdentifiableAlert.swift */,
-				32867AE82AE82256004CF233 /* test.swift */,
-				32B06D502AE3008200E8A04B /* APIConstants.swift */,
-				3210C9F52AE30B8B008BC285 /* LoadingView.swift */,
 			);
 			path = Kursash;
 			sourceTree = "<group>";
@@ -147,8 +145,8 @@
 		3216FC502AB5AB0400C29CB3 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				3210C9F52AE30B8B008BC285 /* LoadingView.swift */,
 				3269F9EA2B067D4F004E5AFF /* Nasa */,
-				3216FC412AB5A57900C29CB3 /* ContentView.swift */,
 				329514B12AC4539500A0F176 /* Weather */,
 				3207E2872ADE9A2B00C010B3 /* Auth */,
 				3207E2892ADE9A4D00C010B3 /* Account */,
@@ -159,6 +157,8 @@
 		3216FC512AB5AB0900C29CB3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				3221E65A2B2EEA0200711206 /* YouTubePlayer.swift */,
+				32B06D502AE3008200E8A04B /* APIConstants.swift */,
 				320CAF402ADBCEDD00C509DF /* WeatherData.swift */,
 				3220AB572B06650700C9CA72 /* NasaData.swift */,
 				32E055BB2B08327600AAC771 /* UserData.swift */,
@@ -258,7 +258,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				320CAF462ADBCF4A00C509DF /* WeatherDataFieldView.swift in Sources */,
-				32867AE92AE82256004CF233 /* test.swift in Sources */,
+				3221E65D2B2EF8A300711206 /* TwoAuthView.swift in Sources */,
+				3221E65B2B2EEA0200711206 /* YouTubePlayer.swift in Sources */,
 				3220AB582B06650700C9CA72 /* NasaData.swift in Sources */,
 				32EC4B822AE08D19001E3605 /* RegisterRequest.swift in Sources */,
 				3207E28B2ADE9A8C00C010B3 /* LoginView.swift in Sources */,
@@ -276,7 +277,6 @@
 				32B06D512AE3008200E8A04B /* APIConstants.swift in Sources */,
 				3269F9EC2B067D68004E5AFF /* NasaView.swift in Sources */,
 				320CAF412ADBCEDD00C509DF /* WeatherData.swift in Sources */,
-				32B06D4F2AE2FD2700E8A04B /* IdentifiableAlert.swift in Sources */,
 				32B06D4B2AE2EBDF00E8A04B /* MainViewModel.swift in Sources */,
 				3220AB5A2B06659000C9CA72 /* NasaDataViewModel.swift in Sources */,
 			);

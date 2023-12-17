@@ -1,16 +1,13 @@
 //
-//  test.swift
+//  TwoAuthView.swift
 //  Kursash
 //
-//  Created by Гаджи Герейакаев on 24.10.2023.
+//  Created by Гаджи Герейакаев on 17.12.2023.
 //
 
 import SwiftUI
 
-
-struct test: View {
-    
-    
+struct TwoAuthView: View {
     let color = #colorLiteral(red: 0.5811814666, green: 0.8301858306, blue: 0.9220091105, alpha: 1)
     @FocusState private var focusedField: Int?
     
@@ -84,7 +81,6 @@ struct DigitTextField: View {
     }
 }
 
-
 #Preview {
-    test()
+    TwoAuthView()
 }

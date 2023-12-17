@@ -21,7 +21,7 @@ struct WeatherView: View {
                         .frame(height: 40)
                     
                     HStack {
-                        TextField("Город", text: $cityName)
+                        TextField("City", text: $cityName)
                             .padding(.leading, 20)
                             .frame(height: 40)
                         
@@ -54,12 +54,12 @@ struct WeatherView: View {
                             GridItem(),
                             GridItem()
                         ]) {
-                            WeatherDataFieldView(title: "Температура", value: "\(String(format: "%.1f", weatherData.temperature))°C", image: "thermometer.medium")
+                            WeatherDataFieldView(title: "Temperature", value: "\(String(format: "%.1f", weatherData.temperature))°C", image: "thermometer.medium")
                             WeatherDataFieldView(title: "Условия", value: weatherData.condition, image: "")
-                            WeatherDataFieldView(title: "Давление", value: "\(weatherData.pressure ?? 0) hPa", image: "drop.triangle")
-                            WeatherDataFieldView(title: "Влажность", value: "\(weatherData.humidity ?? 0)%", image: "humidity.fill")
-                            WeatherDataFieldView(title: "Восход", value:  weatherDataVM.formatTimestamp(weatherData.sunrise ?? 0), image: "sunrise")
-                            WeatherDataFieldView(title: "Закат", value: weatherDataVM.formatTimestamp(weatherData.sunset ?? 0), image: "sunset")
+                            WeatherDataFieldView(title: "Presure", value: "\(weatherData.pressure ?? 0) hPa", image: "drop.triangle")
+                            WeatherDataFieldView(title: "Humidity", value: "\(weatherData.humidity ?? 0)%", image: "humidity.fill")
+                            WeatherDataFieldView(title: "Sunrise", value:  weatherDataVM.formatTimestamp(weatherData.sunrise ?? 0), image: "sunrise")
+                            WeatherDataFieldView(title: "Sunset", value: weatherDataVM.formatTimestamp(weatherData.sunset ?? 0), image: "sunset")
                             // Добавьте другие поля сюда
                         }
                         .padding(.horizontal)
@@ -67,13 +67,7 @@ struct WeatherView: View {
                 }
             }
             Spacer()
-            HStack {
-                Button{
-                    mainVM.logout()
-                } label: {
-                    Text("Logout")
-                }
-            }
+            
             .frame(width: geometry.size.width, height: geometry.size.height, alignment: .top)
             
         }

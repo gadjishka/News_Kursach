@@ -59,7 +59,7 @@ struct LoginView: View {
                                 .padding(.top, 26)
                         } else {
                             Button {
-                                mainVM.login(email: login, password: password)
+                                mainVM.preLogin(email: login, password: password)
                             } label: {
                                 Text("Authorize")
                                     .foregroundColor(Color.white)

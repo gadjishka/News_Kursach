@@ -15,6 +15,7 @@ struct UserProfileView: View {
     @State private var email: String = "gadjig@mil.ru"
     @State private var favoriteCity = "Moscow"
     @State private var isEditingCity = false
+    @EnvironmentObject var mainVM: MainViewModel
     
     var body: some View {
         NavigationStack {
@@ -36,7 +37,7 @@ struct UserProfileView: View {
                 
                 Section {
                     Button {
-                        //
+                        mainVM.logout()
                     } label: {
                         Text("Log out")
                             .foregroundColor(.red)

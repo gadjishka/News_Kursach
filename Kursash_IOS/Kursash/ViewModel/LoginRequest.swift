@@ -17,5 +17,10 @@ struct ServerTokenResponse: Codable {
 // Структура для представления данных в запросе
 struct LoginRequest: Codable {
     var email: String
+    var code: String
+}
+
+struct PreLoginRequest: Codable {
+    var email: String
     var password: String
 }

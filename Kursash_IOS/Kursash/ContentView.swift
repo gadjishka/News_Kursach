@@ -22,7 +22,10 @@ struct ContentView: View {
                         }
                 } else if mainVM.showAuthContainer == .show {
                     LoginView()
-                } else if mainVM.showAuthContainer == .not_show {
+                } else if mainVM.showAuthContainer == .preLogin {
+                    TwoAuthView()
+                }
+                else if mainVM.showAuthContainer == .not_show {
                     TabView {
                         WeatherView()
                             .tabItem {

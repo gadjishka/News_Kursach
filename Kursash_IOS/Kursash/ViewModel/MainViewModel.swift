@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 enum ShowAuthContainer {
-    case show, not_show, loading
+    case show, not_show, loading, preLogin
 }
 
 class MainViewModel: ObservableObject {
@@ -18,6 +18,7 @@ class MainViewModel: ObservableObject {
     @Published var loginPending = false
     @Published var weatherIsLoading:Loading = .notStart
     @Published var user: UserData?
+    @Published var userEmail: String?
     
     func checkToken() {
         if TokenManager.checkTokenExpire() != .expired {
@@ -27,31 +28,38 @@ class MainViewModel: ObservableObject {
                 
             }
             self.token = TokenManager.loadToken()
-            self.showAuthContainer = .not_show
+            DispatchQueue.main.async {
+                self.showAuthContainer = .not_show
+            }
+            
             loadUserData()
 
 
             
         } else {
-            self.showAuthContainer = .show
+            DispatchQueue.main.async {
+                self.showAuthContainer = .show
+            }
         }
     }
     
     func logout() {
         TokenManager.deleteToken()
         token = nil
-        showAuthContainer = .show
+        DispatchQueue.main.async {
+            self.showAuthContainer = .show
+        }
     }
     
     // Метод для выполнения авторизации
-    func login(email: String, password: String) {
+    func login(code: String) {
         withAnimation {
             
             self.loginPending = true
             
         }
-        let user = LoginRequest(email: email, password: password)
-        performRequest(url: APIConstants.loginUrl, body: user) {  (result: Result<ServerTokenResponse, Error>) in
+        let user = LoginRequest(email: self.userEmail!, code: code)
+        performRequest(url: APIConstants.loginUrl, body: user, responseType: ServerTokenResponse.self) {  (result: Result<ServerTokenResponse, Error>) in
             withAnimation {
                 DispatchQueue.main.async {
                     self.loginPending = false
@@ -67,11 +75,37 @@ class MainViewModel: ObservableObject {
         }
     }
     
+    
+    
+    func preLogin(email: String, password: String) {
+        let user = PreLoginRequest(email: email, password: password)
+        performRequest(url: APIConstants.preLoginUrl, body: user, responseType: String.self) { (result: Result<String, Error>) in
+            withAnimation {
+                DispatchQueue.main.async {
+                    self.loginPending = false
+                }
+            }
+            
+            switch result {
+            case .success(let _):
+                DispatchQueue.main.async {
+                    self.showAuthContainer = .preLogin
+                    self.userEmail = email
+                }
+                
+            case .failure(let error):
+                print("Ошибка при авторизации: \(error)")
+            }
+        }
+    }
+
+    
+    
     // Метод для выполнения регистрации
     func register(firstname: String, lastname: String, email: String, password: String) {
         
         let user = RegisterRequest(firstname: firstname, lastname: lastname, email: email, password: password)
-        performRequest(url: APIConstants.registerUrl, body: user) { [weak self] (result: Result<ServerTokenResponse, Error>) in
+        performRequest(url: APIConstants.registerUrl, body: user, responseType: ServerTokenResponse.self) { [weak self] (result: Result<ServerTokenResponse, Error>) in
             guard let self = self else { return }
             switch result {
             case .success(let authResponse):
@@ -94,7 +128,7 @@ class MainViewModel: ObservableObject {
     }
     
     // Общий метод для выполнения запросов
-    private func performRequest<T: Codable>(url: String, body: T, completion: @escaping (Result<ServerTokenResponse, Error>) -> Void) {
+    private func performRequest<T: Codable, U: Codable>(url: String, body: T, responseType: U.Type, completion: @escaping (Result<U, Error>) -> Void) {
         guard let url = URL(string: url) else {
             completion(.failure(NSError(domain: "Invalid URL", code: 0, userInfo: nil)))
             return
@@ -120,14 +154,25 @@ class MainViewModel: ObservableObject {
             
             if let data = data {
                 do {
-                    let response = try JSONDecoder().decode(ServerTokenResponse.self, from: data)
-                    completion(.success(response))
+                    if U.self == String.self {
+                        // Если тип ответа - строка, возвращаем ее напрямую
+                        if let stringResponse = String(data: data, encoding: .utf8) as? U {
+                            completion(.success(stringResponse))
+                        } else {
+                            completion(.failure(NSError(domain: "Invalid response type", code: 0, userInfo: nil)))
+                        }
+                    } else {
+                        // Если тип ответа - структура, декодируем в соответствующий тип
+                        let response = try JSONDecoder().decode(U.self, from: data)
+                        completion(.success(response))
+                    }
                 } catch {
                     completion(.failure(error))
                 }
             }
         }.resume()
     }
+
     
     private func loadUserData() {
         
